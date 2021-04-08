@@ -1,0 +1,10 @@
+XlassLoader类 重新 loadClass(String name, boolean resolve) 方法，执行报错：
+Prohibited package name: java.lang
+
+原因：
+XlassLoader类加载器 在加载 Hello 类时，会先加载 Hello 的父类 java.lang.Object，该类是输入Java核心类库里面的类；
+根据java的原则，Object 不允许用户自定义重写与加载，包名+类名不能一样；
+所以当 XlassLoader 加载 Object 类时就会报错，Prohibited package name: java.lang；
+具体可看：ClassLoader.preDefineClass() 方法
+参考blog ： https://blog.csdn.net/kzcming/article/details/81015203
+===============================================================================================
