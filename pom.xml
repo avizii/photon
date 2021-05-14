@@ -9,23 +9,56 @@
     <packaging>pom</packaging>
     <version>0.0.1</version>
     <modules>
-        <module>glint-jvm</module>
-        <module>glint-nio</module>
-        <module>glint-concurrent</module>
-        <module>glint-framework</module>
-        <module>glint-cache</module>
-        <module>glint-rpc</module>
-        <module>glint-mq</module>
-        <module>glint-db</module>
+        <module>glint-engine</module>
+        <module>glint-common</module>
     </modules>
 
     <properties>
         <java.version>8</java.version>
+        <scala.version>2.12</scala.version>
+
+        <spark.version>3.1.1</spark.version>
+
+        <spring-boot.version>2.4.5</spring-boot.version>
+
 
         <junit.platform.version>1.5.2</junit.platform.version>
         <junit.jupiter.version>5.5.2</junit.jupiter.version>
         <junit.vintage.version>5.5.2</junit.vintage.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Structured logging -->
+            <dependency>
+                <groupId>structlog4j</groupId>
+                <artifactId>structlog4j-api</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+
+            <!-- Optional JSON formatter -->
+            <dependency>
+                <groupId>structlog4j</groupId>
+                <artifactId>structlog4j-json</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/io.sentry/sentry -->
+            <dependency>
+                <groupId>io.sentry</groupId>
+                <artifactId>sentry</artifactId>
+                <version>1.7.17</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
