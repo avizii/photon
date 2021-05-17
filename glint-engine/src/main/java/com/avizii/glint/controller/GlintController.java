@@ -1,9 +1,15 @@
 package com.avizii.glint.controller;
 
+import com.avizii.glint.common.GlintConstant;
+import com.avizii.glint.dto.ExecutionDto;
 import com.avizii.glint.dto.ExecutionResponse;
 import com.avizii.glint.dto.RunScriptRequest;
+import com.avizii.glint.job.GlintContext;
+import com.avizii.glint.job.JobManager;
 import com.avizii.glint.session.SessionManager;
+import com.google.common.base.Preconditions;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.spark.sql.SparkSession;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,10 +31,25 @@ public class GlintController {
 
     @PostMapping("/runScript")
     public ExecutionResponse runScript(@RequestBody @Valid RunScriptRequest request) {
+        // 1.获取spark session
         SparkSession session = SessionManager.getSessionByType(request.getSessionType(), request.getToken());
 
+        Preconditions.checkArgument(!(request.getAsync() && StringUtils.isEmpty(request.getCallbackUrl())), "异步执行必须设置[callbackUrl]参数!");
 
-        return new ExecutionResponse();
+        GlintContext context = new GlintContext(session, request, JobManager.createJobInfo(request));
+
+        switch (request.getExecuteMode()) {
+            case GlintConstant.GLINT_EXECUTE_MODE_ANALYZE:
+                return null;
+
+            case GlintConstant.GLINT_EXECUTE_MODE_QUERY:
+                ExecutionDto executionResult = request.getAsync() ? JobManager.runAsync(context) : JobManager.run(context);
+                return new ExecutionResponse(executionResult);
+
+            default:
+                throw new RuntimeException();
+        }
     }
+
 
 }

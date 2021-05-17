@@ -23,4 +23,8 @@ public class GlintConstant {
     public static final String GLINT_SESSION_USER = "user";
 
     public static final String GLINT_SESSION_REQUEST = "request";
+
+    public static final String GLINT_EXECUTE_MODE_ANALYZE = "analyze";
+
+    public static final String GLINT_EXECUTE_MODE_QUERY = "query";
 }

@@ -26,6 +26,8 @@ public class RunScriptRequest {
 
     private String executeMode;  // query/analyze
 
+    private String jobName;
+
     private String jobId;  // job identify - uuid
 
     private Long timeout;
@@ -43,6 +45,8 @@ public class RunScriptRequest {
     private Boolean skipAuth;
 
     private Boolean skipGrammarValidate;
+
+    private Boolean skipPhysical;
 
     private Boolean includeSchema; // return schema info
 
