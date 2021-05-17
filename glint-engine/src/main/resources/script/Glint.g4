@@ -60,11 +60,11 @@ IGNORE:'ignore';
 as: AS;
 into: INTO;
 
-saveMode: (OVERWRITE|APPEND|ERRORIfExists|IGNORE);
+//saveMode: (OVERWRITE|APPEND|ERRORIfExists|IGNORE);
 
 where: OPTIONS|WHERE;
 
-whereExpressions: where expression? booleanExpression*;
+//whereExpressions: where expression? booleanExpression*;
 
 
 overwrite

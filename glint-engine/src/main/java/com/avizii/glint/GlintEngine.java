@@ -1,6 +1,9 @@
 package com.avizii.glint;
 
-import com.avizii.glint.runtime.GlintRuntime;
+import com.avizii.glint.runtime.SparkRuntime;
+import com.avizii.glint.util.ParamsUtil;
+
+import java.util.Map;
 
 /**
  * @Author : Avizii
@@ -9,7 +12,8 @@ import com.avizii.glint.runtime.GlintRuntime;
 public class GlintEngine {
 
     public static void main(String[] args) {
-//        GlintRuntime.create()
+        Map<String, String> params = new ParamsUtil(args).getParamsMap();
+        SparkRuntime.create(params);
         GlintApplication.main(new String[0]);
     }
 }
