@@ -11,7 +11,7 @@ import java.util.Map;
 public class ParamsUtil {
 
     private static final char PARAM_START_FLAG = '-'; //参数开始标记
-    private static char PARAM_SPLIT_FLAG[] = new char[]{'\t', ' '};//参数间隔标记
+    private static final char[] PARAM_SPLIT_FLAG = new char[]{'\t', ' '};//参数间隔标记
     private static char PARAM_QUOTE_FLAG = '"';//引号
 
 

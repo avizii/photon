@@ -15,9 +15,9 @@ import java.util.Map;
 public class SparkRuntime extends GlintRuntime<SparkSession> {
 
     public static void create(Map<String, String> params) {
-        SparkSession session = new SparkRuntime(params).start();
+        SparkSession session = new SparkRuntime(params).run();
         // 添加到Session管理器
-        SessionManager.addSession(session);
+        SessionManager.addSession(GlintConstant.GLINT_SESSION_GLOBAL, session);
     }
 
     private SparkRuntime(Map<String, String> params) {
@@ -25,7 +25,7 @@ public class SparkRuntime extends GlintRuntime<SparkSession> {
     }
 
     @Override
-    public SparkSession start() {
+    public SparkSession run() {
         SparkConf sparkConf = new SparkConf();
 
         // 设置spark官方提供的config

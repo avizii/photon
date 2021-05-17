@@ -14,6 +14,6 @@ public abstract class GlintRuntime<SESSION> {
         this.params = params;
     }
 
-    public abstract SESSION start();
+    public abstract SESSION run();
 
 }
