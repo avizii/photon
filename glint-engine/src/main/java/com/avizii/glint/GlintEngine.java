@@ -12,7 +12,7 @@ import java.util.Map;
 public class GlintEngine {
 
     public static void main(String[] args) {
-        Map<String, String> params = new ParamsUtil(args).getParamsMap();
+        Map<String, String> params = ParamsUtil.parse(args);
         SparkRuntime.create(params);
         GlintApplication.main(new String[0]);
     }
