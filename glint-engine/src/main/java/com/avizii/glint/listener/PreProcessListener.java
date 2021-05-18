@@ -17,7 +17,7 @@ public class PreProcessListener extends GlintBaseListener implements GlintHandle
 
     @Override
     public GlintContext handle() {
-        return null;
+        return context;
     }
 
     @Override

@@ -6,17 +6,19 @@ import com.avizii.glint.dto.RunScriptRequest;
 import com.avizii.glint.listener.ListenerChain;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.function.Supplier;
+
 /**
  * @Author : Avizii
  * @Create : 2021.05.17
  */
 public class JobManager {
 
-    public static ExecutionDto run(GlintContext context) {
+    public static <T> ExecutionDto run(GlintContext context, Supplier<T> supplier) {
         return null;
     }
 
-    public static ExecutionDto runAsync(GlintContext context) {
+    public static <T> ExecutionDto runAsync(GlintContext context, Supplier<T> supplier) {
         return null;
     }
 

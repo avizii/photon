@@ -8,6 +8,7 @@ import java.util.List;
 /**
  * @Author : Avizii
  * @Create : 2021.05.18
+ * @Description : 责任链模式处理Antlr Listener
  */
 public class ListenerChain {
 

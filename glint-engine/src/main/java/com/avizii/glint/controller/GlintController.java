@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.function.Supplier;
 
 /**
  * @Author : Avizii
@@ -43,7 +44,8 @@ public class GlintController {
                 return null;
 
             case GlintConstant.GLINT_EXECUTE_MODE_QUERY:
-                ExecutionDto executionResult = request.getAsync() ? JobManager.runAsync(context) : JobManager.run(context);
+                Supplier<ExecutionDto> supplier = () -> null; // TODO
+                ExecutionDto executionResult = request.getAsync() ? JobManager.runAsync(context, supplier) : JobManager.run(context, supplier);
                 return new ExecutionResponse(executionResult);
 
             default:
