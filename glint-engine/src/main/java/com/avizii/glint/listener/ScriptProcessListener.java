@@ -1,5 +1,7 @@
 package com.avizii.glint.listener;
 
+import com.avizii.glint.dto.RunScriptRequest;
+import com.avizii.glint.execute.GlintExecutor;
 import com.avizii.glint.job.GlintContext;
 import com.avizii.glint.parse.GlintBaseListener;
 
@@ -7,11 +9,25 @@ import com.avizii.glint.parse.GlintBaseListener;
  * @Author : Avizii
  * @Create : 2021.05.17
  */
-public class ScriptProcessListener extends GlintBaseListener {
+public class ScriptProcessListener extends GlintBaseListener implements GlintHandler {
 
-    private final GlintContext context;
+    private GlintContext context;
 
     public ScriptProcessListener(GlintContext context) {
+        this.context = context;
+    }
+
+    @Override
+    public GlintContext handle() {
+        RunScriptRequest param = context.getParam();
+        if (!param.getSkipPhysical()) {
+            GlintExecutor.execute(param.getSql(), this);
+        }
+        return context;
+    }
+
+    @Override
+    public void updateContext(GlintContext context) {
         this.context = context;
     }
 }

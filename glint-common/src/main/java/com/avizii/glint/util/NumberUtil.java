@@ -83,7 +83,7 @@ public class NumberUtil {
     public static double parseDouble(Object obj) {
         double result = 0;
         try {
-            result = Double.valueOf(obj.toString());
+            result = Double.parseDouble(obj.toString());
         } catch (Exception e) {
             result = 0;
         }
@@ -97,7 +97,7 @@ public class NumberUtil {
     public static float parseFloat(Object obj) {
         float result = 0;
         try {
-            result = Float.valueOf(obj.toString());
+            result = Float.parseFloat(obj.toString());
         } catch (Exception e) {
             result = 0;
         }
@@ -111,9 +111,8 @@ public class NumberUtil {
     public static String toNumStr(Object obj) {
         int result = 0;
         try {
-            result = Integer.valueOf(obj.toString());
-        } catch (Exception e) {
-            result = 0;
+            result = Integer.parseInt(obj.toString());
+        } catch (Exception ignored) {
         }
         return String.valueOf(result);
     }
@@ -129,7 +128,7 @@ public class NumberUtil {
         double pd = 0;
         try {
             pd = parseDouble(df.format(d));
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
         return pd;
     }
@@ -144,14 +143,14 @@ public class NumberUtil {
     public static double dealDecimal(double d, int num) {
         double result = 0;
         try {
-            StringBuffer pattern = new StringBuffer("#");
+            StringBuilder pattern = new StringBuilder("#");
             if (num > 0) pattern.append(".");
             for (int i = 1; i <= num; i++) {
                 pattern.append("0");
             }
             DecimalFormat df = new DecimalFormat(pattern.toString());
             result = NumberUtil.dealDecimal(d, df);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
         return result;
 

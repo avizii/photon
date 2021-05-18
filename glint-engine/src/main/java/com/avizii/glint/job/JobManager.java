@@ -3,6 +3,7 @@ package com.avizii.glint.job;
 import cn.hutool.core.lang.UUID;
 import com.avizii.glint.dto.ExecutionDto;
 import com.avizii.glint.dto.RunScriptRequest;
+import com.avizii.glint.listener.ListenerChain;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -28,5 +29,10 @@ public class JobManager {
                 .startTime(System.currentTimeMillis())
                 .timeout(request.getTimeout())
                 .build();
+    }
+
+    public static void runJob(GlintContext context) {
+        ListenerChain chain = ListenerChain.of(context);
+        chain.handle();
     }
 }
