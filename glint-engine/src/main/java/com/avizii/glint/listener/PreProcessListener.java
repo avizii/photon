@@ -1,5 +1,6 @@
 package com.avizii.glint.listener;
 
+import com.avizii.glint.execute.GlintExecutor;
 import com.avizii.glint.job.GlintContext;
 import com.avizii.glint.parse.GlintBaseListener;
 
@@ -9,19 +10,9 @@ import com.avizii.glint.parse.GlintBaseListener;
  */
 public class PreProcessListener extends GlintBaseListener implements GlintHandler {
 
-    private GlintContext context;
-
-    public PreProcessListener(GlintContext context) {
-        this.context = context;
-    }
-
     @Override
-    public GlintContext handle() {
-        return context;
+    public void handle() {
+        GlintContext context = GlintExecutor.getContext();
     }
 
-    @Override
-    public void updateContext(GlintContext context) {
-        this.context = context;
-    }
 }

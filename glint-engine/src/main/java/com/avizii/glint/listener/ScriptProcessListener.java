@@ -11,23 +11,13 @@ import com.avizii.glint.parse.GlintBaseListener;
  */
 public class ScriptProcessListener extends GlintBaseListener implements GlintHandler {
 
-    private GlintContext context;
-
-    public ScriptProcessListener(GlintContext context) {
-        this.context = context;
-    }
-
     @Override
-    public GlintContext handle() {
+    public void handle() {
+        GlintContext context = GlintExecutor.getContext();
         RunScriptRequest param = context.getParam();
         if (!param.getSkipPhysical()) {
-            GlintExecutor.execute(param.getSql(), this);
+            GlintExecutor.parse(param.getSql(), this);
         }
-        return context;
     }
 
-    @Override
-    public void updateContext(GlintContext context) {
-        this.context = context;
-    }
 }

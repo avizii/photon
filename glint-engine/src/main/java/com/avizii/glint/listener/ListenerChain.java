@@ -19,20 +19,16 @@ public class ListenerChain {
     }
 
     public void handle() {
-        GlintContext context = null;
-        for (GlintHandler handler : handlerList) {
-            if (context != null) handler.updateContext(context);
-            context = handler.handle();
-        }
+        handlerList.forEach(GlintHandler::handle);
     }
 
     public static ListenerChain of(GlintContext context) {
         ListenerChain chain = new ListenerChain();
-        chain.addHandle(new IncludeProcessListener(context));
-        chain.addHandle(new PreProcessListener(context));
-        chain.addHandle(new GrammarProcessListener(context));
-        chain.addHandle(new AuthProcessListener(context));
-        chain.addHandle(new ScriptProcessListener(context));
+        chain.addHandle(new IncludeProcessListener());
+        chain.addHandle(new PreProcessListener());
+        chain.addHandle(new GrammarProcessListener());
+        chain.addHandle(new AuthProcessListener());
+        chain.addHandle(new ScriptProcessListener());
         return chain;
     }
 

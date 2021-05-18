@@ -1,5 +1,6 @@
 package com.avizii.glint.execute;
 
+import com.avizii.glint.job.GlintContext;
 import com.avizii.glint.parse.GlintLexer;
 import com.avizii.glint.parse.GlintListener;
 import com.avizii.glint.parse.GlintParser;
@@ -12,7 +13,9 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
  */
 public class GlintExecutor {
 
-    public static void execute(String input, GlintListener listener) {
+    private static final ThreadLocal<GlintContext> glintContext = new ThreadLocal<>();
+
+    public static void parse(String input, GlintListener listener) {
         CaseChangingCharStream charStream = new CaseChangingCharStream(input);
         GlintLexer lexer = new GlintLexer(charStream);
         CommonTokenStream tokenStream = new CommonTokenStream(lexer);
@@ -22,5 +25,17 @@ public class GlintExecutor {
         parser.addErrorListener(new SyntaxErrorListener());
 
         ParseTreeWalker.DEFAULT.walk(listener, parser.statement());
+    }
+
+    public static GlintContext getContext() {
+        return glintContext.get();
+    }
+
+    public static void setContext(GlintContext context) {
+        glintContext.set(context);
+    }
+
+    public static void removeContext() {
+        glintContext.remove();
     }
 }

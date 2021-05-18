@@ -4,6 +4,7 @@ import com.avizii.glint.common.GlintConstant;
 import com.avizii.glint.dto.ExecutionDto;
 import com.avizii.glint.dto.ExecutionResponse;
 import com.avizii.glint.dto.RunScriptRequest;
+import com.avizii.glint.execute.GlintExecutor;
 import com.avizii.glint.job.GlintContext;
 import com.avizii.glint.job.JobManager;
 import com.avizii.glint.session.SessionManager;
@@ -37,7 +38,9 @@ public class GlintController {
 
         Preconditions.checkArgument(!(request.getAsync() && StringUtils.isEmpty(request.getCallbackUrl())), "异步执行必须设置[callbackUrl]参数!");
 
+        // 通过 ThreadLocal 传递 context 信息
         GlintContext context = new GlintContext(session, request, JobManager.createJobInfo(request));
+        GlintExecutor.setContext(context);
 
         switch (request.getExecuteMode()) {
             case GlintConstant.GLINT_EXECUTE_MODE_ANALYZE:

@@ -1,6 +1,7 @@
 package com.avizii.glint.listener;
 
 import com.avizii.glint.dto.RunScriptRequest;
+import com.avizii.glint.execute.GlintExecutor;
 import com.avizii.glint.job.GlintContext;
 import com.avizii.glint.parse.GlintBaseListener;
 
@@ -10,23 +11,13 @@ import com.avizii.glint.parse.GlintBaseListener;
  */
 public class GrammarProcessListener extends GlintBaseListener implements GlintHandler {
 
-    private GlintContext context;
-
-    public GrammarProcessListener(GlintContext context) {
-        this.context = context;
-    }
-
     @Override
-    public GlintContext handle() {
+    public void handle() {
+        GlintContext context = GlintExecutor.getContext();
         RunScriptRequest param = context.getParam();
         if (!param.getSkipGrammarValidate()) {
             // do something
         }
-        return context;
     }
 
-    @Override
-    public void updateContext(GlintContext context) {
-        this.context = context;
-    }
 }
