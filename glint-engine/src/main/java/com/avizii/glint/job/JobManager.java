@@ -14,11 +14,11 @@ import java.util.function.Supplier;
  */
 public class JobManager {
 
-    public static <T> ExecutionDto run(GlintContext context, Supplier<T> supplier) {
+    public static <T> ExecutionDto run(Supplier<T> supplier) {
         return null;
     }
 
-    public static <T> ExecutionDto runAsync(GlintContext context, Supplier<T> supplier) {
+    public static <T> ExecutionDto runAsync(Supplier<T> supplier) {
         return null;
     }
 

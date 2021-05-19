@@ -50,9 +50,11 @@ public class RunScriptRequest {
 
     private Boolean includeSchema; // return schema info
 
+    private Boolean onlySchema;
+
     private String fetchType; // take/collect
 
-    private String fetchSize; // take size data
+    private Integer fetchSize; // take size data
 
     private Boolean enableQueryWithIndexer; // query with indexer to speed up
 

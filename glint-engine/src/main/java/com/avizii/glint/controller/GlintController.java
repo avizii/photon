@@ -7,10 +7,13 @@ import com.avizii.glint.dto.RunScriptRequest;
 import com.avizii.glint.execute.GlintExecutor;
 import com.avizii.glint.job.GlintContext;
 import com.avizii.glint.job.JobManager;
+import com.avizii.glint.listener.ListenerChain;
 import com.avizii.glint.session.SessionManager;
 import com.google.common.base.Preconditions;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * @Author : Avizii
@@ -47,8 +52,8 @@ public class GlintController {
                 return null;
 
             case GlintConstant.GLINT_EXECUTE_MODE_QUERY:
-                Supplier<ExecutionDto> supplier = () -> null; // TODO
-                ExecutionDto executionResult = request.getAsync() ? JobManager.runAsync(context, supplier) : JobManager.run(context, supplier);
+                Supplier<ExecutionDto> supplier = createSupplier();
+                ExecutionDto executionResult = request.getAsync() ? JobManager.runAsync(supplier) : JobManager.run(supplier);
                 return new ExecutionResponse(executionResult);
 
             default:
@@ -56,5 +61,35 @@ public class GlintController {
         }
     }
 
+    private Supplier<ExecutionDto> createSupplier() {
+        return () -> {
+            GlintContext context = GlintExecutor.getContext();
+            RunScriptRequest param = context.getParam();
+
+            ListenerChain chain = ListenerChain.of(context);
+            chain.handle();
+
+            ExecutionDto dto = new ExecutionDto();
+            if (!param.getSilence()) {
+                if (StringUtils.isNotBlank(context.getLastSelectTable())) {
+                    SparkSession session = context.getSession();
+                    Dataset<Row> dataframe = session.table(context.getLastSelectTable());
+
+                    if (param.getIncludeSchema()) {
+                        String schemaJson = dataframe.schema().json();
+                        dto.setSchemaJson(schemaJson);
+                    }
+
+                    Row[] rows = "collect".equals(param.getFetchType()) ? dataframe.collect() : dataframe.take(param.getFetchSize());
+                    dto.setFetchType(param.getFetchType());
+                    dto.setFetchSize((long) rows.length);
+
+                    String dataJson = Arrays.stream(rows).map(Row::toString).collect(Collectors.joining(","));
+                    dto.setDataJson(dataJson);
+                }
+            }
+            return dto;
+        };
+    }
 
 }
