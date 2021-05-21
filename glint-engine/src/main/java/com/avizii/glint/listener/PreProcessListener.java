@@ -1,7 +1,7 @@
 package com.avizii.glint.listener;
 
 import com.avizii.glint.execute.GlintExecutor;
-import com.avizii.glint.job.GlintContext;
+import com.avizii.glint.execute.GlintContext;
 import com.avizii.glint.parse.GlintBaseListener;
 
 /**

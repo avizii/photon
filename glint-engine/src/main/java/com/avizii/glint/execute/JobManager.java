@@ -1,9 +1,8 @@
-package com.avizii.glint.job;
+package com.avizii.glint.execute;
 
 import cn.hutool.core.lang.UUID;
 import com.avizii.glint.dto.RunScriptRequest;
 import com.avizii.glint.dto.ScriptResult;
-import com.avizii.glint.execute.GlintExecutor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.spark.sql.SparkSession;
 
