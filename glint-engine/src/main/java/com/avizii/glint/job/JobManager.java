@@ -1,11 +1,14 @@
 package com.avizii.glint.job;
 
 import cn.hutool.core.lang.UUID;
-import com.avizii.glint.dto.ExecutionDto;
 import com.avizii.glint.dto.RunScriptRequest;
-import com.avizii.glint.listener.ListenerChain;
+import com.avizii.glint.dto.ScriptResult;
+import com.avizii.glint.execute.GlintExecutor;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.spark.sql.SparkSession;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.function.Supplier;
 
 /**
@@ -14,11 +17,26 @@ import java.util.function.Supplier;
  */
 public class JobManager {
 
-    public static <T> ExecutionDto run(Supplier<T> supplier) {
-        return null;
+    private static final ExecutorService threadPool = Executors.newFixedThreadPool(20);
+
+    public static <T> ScriptResult run(Supplier<T> supplier) {
+        GlintContext context = GlintExecutor.getContext();
+        SparkSession session = context.getSession();
+        JobInfo job = context.getJobInfo();
+        try {
+            session.sparkContext().setJobGroup(job.getJobId(), job.getJobName() + " - " + job.getJobContent(), true);
+            return (ScriptResult) supplier.get();
+        } finally {
+            session.sparkContext().clearJobGroup();
+        }
     }
 
-    public static <T> ExecutionDto runAsync(Supplier<T> supplier) {
+    public static <T> ScriptResult runAsync(Supplier<T> supplier) {
+        GlintContext context = GlintExecutor.getContext();
+        threadPool.execute(() -> {
+            GlintExecutor.setContext(context);
+            JobManager.run(supplier);
+        });
         return null;
     }
 
@@ -33,8 +51,4 @@ public class JobManager {
                 .build();
     }
 
-    public static void runJob(GlintContext context) {
-        ListenerChain chain = ListenerChain.of(context);
-        chain.handle();
-    }
 }

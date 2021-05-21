@@ -15,5 +15,5 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 public class ExecutionResponse extends BaseResponse {
 
-    private ExecutionDto execution;
+    private ScriptResult execution;
 }

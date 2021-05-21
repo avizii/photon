@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ExecutionDto {
+public class ScriptResult {
 
     private String fetchType;
 

@@ -1,14 +1,18 @@
 package com.avizii.glint.controller;
 
+import cn.hutool.http.HttpUtil;
+import cn.hutool.json.JSONUtil;
 import com.avizii.glint.common.GlintConstant;
-import com.avizii.glint.dto.ExecutionDto;
 import com.avizii.glint.dto.ExecutionResponse;
 import com.avizii.glint.dto.RunScriptRequest;
+import com.avizii.glint.dto.ScriptResult;
+import com.avizii.glint.exception.GlintException;
 import com.avizii.glint.execute.GlintExecutor;
 import com.avizii.glint.job.GlintContext;
 import com.avizii.glint.job.JobManager;
 import com.avizii.glint.listener.ListenerChain;
 import com.avizii.glint.session.SessionManager;
+import com.avizii.glint.util.LogUtil;
 import com.google.common.base.Preconditions;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -23,6 +27,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -46,50 +52,85 @@ public class GlintController {
         // 通过 ThreadLocal 传递 context 信息
         GlintContext context = new GlintContext(session, request, JobManager.createJobInfo(request));
         GlintExecutor.setContext(context);
+        try {
+            switch (request.getExecuteMode()) {
+                case GlintConstant.GLINT_EXECUTE_MODE_ANALYZE:
+                    return null;
 
-        switch (request.getExecuteMode()) {
-            case GlintConstant.GLINT_EXECUTE_MODE_ANALYZE:
-                return null;
+                case GlintConstant.GLINT_EXECUTE_MODE_QUERY:
+                    ScriptResult executionResult = request.getAsync() ?
+                            JobManager.runAsync(createAsyncSupplier()) :
+                            JobManager.run(createSupplier());
 
-            case GlintConstant.GLINT_EXECUTE_MODE_QUERY:
-                Supplier<ExecutionDto> supplier = createSupplier();
-                ExecutionDto executionResult = request.getAsync() ? JobManager.runAsync(supplier) : JobManager.run(supplier);
-                return new ExecutionResponse(executionResult);
+                    return new ExecutionResponse(executionResult);
 
-            default:
-                throw new RuntimeException();
+                default:
+                    throw new RuntimeException();
+            }
+        } catch (Throwable e) {
+            e.printStackTrace();
+            throw new GlintException(e); // 全局异常处理
+        } finally {
+            GlintExecutor.removeContext();
         }
     }
 
-    private Supplier<ExecutionDto> createSupplier() {
+    private Supplier<ScriptResult> createSupplier() {
+        return () -> {
+            GlintContext context = GlintExecutor.getContext();
+            ListenerChain chain = ListenerChain.of(context);
+            chain.handle();
+            return getScriptResult();
+        };
+    }
+
+    private Supplier<ScriptResult> createAsyncSupplier() {
         return () -> {
             GlintContext context = GlintExecutor.getContext();
             RunScriptRequest param = context.getParam();
+            try {
+                ListenerChain chain = ListenerChain.of(context);
+                chain.handle();
+                ScriptResult result = getScriptResult();
 
-            ListenerChain chain = ListenerChain.of(context);
-            chain.handle();
-
-            ExecutionDto dto = new ExecutionDto();
-            if (!param.getSilence()) {
-                if (StringUtils.isNotBlank(context.getLastSelectTable())) {
-                    SparkSession session = context.getSession();
-                    Dataset<Row> dataframe = session.table(context.getLastSelectTable());
-
-                    if (param.getIncludeSchema()) {
-                        String schemaJson = dataframe.schema().json();
-                        dto.setSchemaJson(schemaJson);
-                    }
-
-                    Row[] rows = "collect".equals(param.getFetchType()) ? dataframe.collect() : dataframe.take(param.getFetchSize());
-                    dto.setFetchType(param.getFetchType());
-                    dto.setFetchSize((long) rows.length);
-
-                    String dataJson = Arrays.stream(rows).map(Row::toString).collect(Collectors.joining(","));
-                    dto.setDataJson(dataJson);
-                }
+                Map<String, Object> paramMap = new HashMap<>();
+                paramMap.put("stat", "success");
+                paramMap.put("res", JSONUtil.toJsonStr(result));
+                paramMap.put("job", JSONUtil.toJsonStr(context.getJobInfo()));
+                HttpUtil.post(param.getCallbackUrl(), paramMap);
+            } catch (Throwable e) {
+                e.printStackTrace();
+                Map<String, Object> paramMap = new HashMap<>();
+                paramMap.put("stat", "fail");
+                paramMap.put("msg", LogUtil.formatExceptionMessage(e));
+                paramMap.put("job", JSONUtil.toJsonStr(context.getJobInfo()));
+                HttpUtil.post(param.getCallbackUrl(), paramMap);
             }
-            return dto;
+            return null;
         };
+    }
+
+    private ScriptResult getScriptResult() {
+        GlintContext context = GlintExecutor.getContext();
+        RunScriptRequest param = context.getParam();
+        ScriptResult result = new ScriptResult();
+        if (StringUtils.isNotBlank(context.getLastSelectTable())) {
+            SparkSession session = context.getSession();
+            Dataset<Row> dataframe = session.table(context.getLastSelectTable());
+
+            if (param.getIncludeSchema()) {
+                String schemaJson = dataframe.schema().json();
+                result.setSchemaJson(schemaJson);
+            }
+
+            Row[] rows = "collect".equals(param.getFetchType()) ? dataframe.collect() : dataframe.take(param.getFetchSize());
+            result.setFetchType(param.getFetchType());
+            result.setFetchSize((long) rows.length);
+
+            String dataJson = Arrays.stream(rows).map(Row::toString).collect(Collectors.joining(","));
+            result.setDataJson(dataJson);
+        }
+        return result;
     }
 
 }
