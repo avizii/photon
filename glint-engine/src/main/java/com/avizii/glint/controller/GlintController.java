@@ -123,7 +123,7 @@ public class GlintController {
                 result.setSchemaJson(schemaJson);
             }
 
-            Row[] rows = "collect".equals(param.getFetchType()) ? dataframe.collect() : dataframe.take(param.getFetchSize());
+            Row[] rows = "collect".equals(param.getFetchType()) ? (Row[]) dataframe.collect() : (Row[]) dataframe.take(param.getFetchSize());
             result.setFetchType(param.getFetchType());
             result.setFetchSize((long) rows.length);
 
