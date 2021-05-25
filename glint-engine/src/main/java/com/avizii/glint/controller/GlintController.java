@@ -77,8 +77,7 @@ public class GlintController {
 
     private Supplier<ScriptResult> createSupplier() {
         return () -> {
-            GlintContext context = GlintExecutor.getContext();
-            ListenerChain chain = ListenerChain.of(context);
+            ListenerChain chain = ListenerChain.of();
             chain.handle();
             return getScriptResult();
         };
@@ -89,7 +88,7 @@ public class GlintController {
             GlintContext context = GlintExecutor.getContext();
             RunScriptRequest param = context.getParam();
             try {
-                ListenerChain chain = ListenerChain.of(context);
+                ListenerChain chain = ListenerChain.of();
                 chain.handle();
                 ScriptResult result = getScriptResult();
 

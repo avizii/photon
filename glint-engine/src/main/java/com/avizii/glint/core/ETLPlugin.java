@@ -1,4 +1,4 @@
-package com.avizii.glint.plugin;
+package com.avizii.glint.core;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;

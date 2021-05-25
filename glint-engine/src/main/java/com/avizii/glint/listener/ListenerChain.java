@@ -1,7 +1,5 @@
 package com.avizii.glint.listener;
 
-import com.avizii.glint.execute.GlintContext;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,7 +20,7 @@ public class ListenerChain {
         handlerList.forEach(GlintHandler::handle);
     }
 
-    public static ListenerChain of(GlintContext context) {
+    public static ListenerChain of() {
         ListenerChain chain = new ListenerChain();
         chain.addHandle(new IncludeProcessListener());
         chain.addHandle(new PreProcessListener());
@@ -33,7 +31,7 @@ public class ListenerChain {
     }
 
     public static void main(String[] args) {
-        ListenerChain chain = ListenerChain.of(null);
+        ListenerChain chain = ListenerChain.of();
         for (GlintHandler handler : chain.handlerList) {
             System.out.println(handler.getClass().getSimpleName());
         }

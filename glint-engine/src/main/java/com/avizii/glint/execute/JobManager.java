@@ -16,7 +16,7 @@ import java.util.function.Supplier;
  */
 public class JobManager {
 
-    private static final ExecutorService threadPool = Executors.newFixedThreadPool(20);
+    private static final ExecutorService threadPool = Executors.newFixedThreadPool(50);
 
     public static <T> ScriptResult run(Supplier<T> supplier) {
         GlintContext context = GlintExecutor.getContext();
@@ -33,8 +33,12 @@ public class JobManager {
     public static <T> ScriptResult runAsync(Supplier<T> supplier) {
         GlintContext context = GlintExecutor.getContext();
         threadPool.execute(() -> {
-            GlintExecutor.setContext(context);
-            JobManager.run(supplier);
+            try {
+                GlintExecutor.setContext(context);
+                JobManager.run(supplier);
+            } finally {
+                GlintExecutor.removeContext();
+            }
         });
         return null;
     }

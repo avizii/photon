@@ -1,4 +1,4 @@
-package com.avizii.glint.plugin;
+package com.avizii.glint.core;
 
 import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.expressions.UserDefinedFunction;

@@ -1,4 +1,4 @@
-package com.avizii.glint.datasource;
+package com.avizii.glint.core;
 
 import org.apache.spark.sql.DataFrameWriterV2;
 import org.apache.spark.sql.Dataset;
@@ -13,6 +13,9 @@ import java.util.Map;
  */
 public interface Sink extends DataSource {
 
+    /**
+     * 数据存储
+     */
     void save(DataFrameWriterV2<Row> writer, Dataset<Row> dataframe, SaveMode mode, String path, Map<String, String> params);
 
 }

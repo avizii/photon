@@ -15,6 +15,7 @@ import java.util.Map;
 public class SparkRuntime extends GlintRuntime<SparkSession> {
 
     public static void create(Map<String, String> params) {
+        // 构造SparkSession
         SparkSession session = new SparkRuntime(params).run();
         // 添加到Session管理器
         SessionManager.addSession(GlintConstant.GLINT_SESSION_GLOBAL, session);

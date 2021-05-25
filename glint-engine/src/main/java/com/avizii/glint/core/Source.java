@@ -1,4 +1,4 @@
-package com.avizii.glint.datasource;
+package com.avizii.glint.core;
 
 import org.apache.spark.sql.DataFrameReader;
 import org.apache.spark.sql.Dataset;
