@@ -1,5 +1,6 @@
 package com.avizii.glint.controller;
 
+import cn.hutool.core.exceptions.ExceptionUtil;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
 import com.avizii.glint.common.GlintConstant;
@@ -7,12 +8,11 @@ import com.avizii.glint.dto.ExecutionResponse;
 import com.avizii.glint.dto.RunScriptRequest;
 import com.avizii.glint.dto.ScriptResult;
 import com.avizii.glint.exception.GlintException;
-import com.avizii.glint.execute.GlintExecutor;
 import com.avizii.glint.execute.GlintContext;
+import com.avizii.glint.execute.GlintExecutor;
 import com.avizii.glint.execute.JobManager;
 import com.avizii.glint.listener.ListenerChain;
 import com.avizii.glint.session.SessionManager;
-import com.avizii.glint.util.LogUtil;
 import com.google.common.base.Preconditions;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -101,7 +101,7 @@ public class GlintController {
                 e.printStackTrace();
                 Map<String, Object> paramMap = new HashMap<>();
                 paramMap.put("stat", "fail");
-                paramMap.put("msg", LogUtil.formatExceptionMessage(e));
+                paramMap.put("msg", ExceptionUtil.stacktraceToString(e));
                 paramMap.put("job", JSONUtil.toJsonStr(context.getJobInfo()));
                 HttpUtil.post(param.getCallbackUrl(), paramMap);
             }
