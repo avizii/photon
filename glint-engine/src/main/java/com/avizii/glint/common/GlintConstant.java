@@ -28,8 +28,4 @@ public class GlintConstant {
 
     public static final String GLINT_EXECUTE_MODE_QUERY = "query";
 
-    public static final String GLINT_STREAM_NAME = "streamName";
-
-    public static final String GLINT_STREAM = "stream";
-
 }

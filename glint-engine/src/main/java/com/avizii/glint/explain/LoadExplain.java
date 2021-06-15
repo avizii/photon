@@ -1,9 +1,10 @@
 package com.avizii.glint.explain;
 
 import com.avizii.glint.annotation.Syntax;
-import com.avizii.glint.common.GlintConstant;
+import com.avizii.glint.common.DataSourceConstant;
 import com.avizii.glint.common.ScriptUtils;
 import com.avizii.glint.core.Explain;
+import com.avizii.glint.datasource.SourceRegister;
 import com.avizii.glint.execute.GlintContext;
 import com.avizii.glint.execute.GlintExecutor;
 import com.avizii.glint.parse.GlintParser.*;
@@ -11,8 +12,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.apache.spark.sql.DataFrameReader;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,8 +35,8 @@ public class LoadExplain implements Explain {
         LoadParam param = extractParamFromSqlContext(ctx);
 
         // handle streaming input
-        if (context.env().containsKey(GlintConstant.GLINT_STREAM_NAME)) {
-            context.addEnv(GlintConstant.GLINT_STREAM, Boolean.TRUE.toString());
+        if (context.env().containsKey(DataSourceConstant.GLINT_STREAM_NAME)) {
+            context.addEnv(DataSourceConstant.GLINT_STREAM, Boolean.TRUE.toString());
         }
 
         // build spark sql DataReader
@@ -75,6 +79,36 @@ public class LoadExplain implements Explain {
         DataFrameReader reader = session.read().options(param.getOptions());
 
         // TODO: 2021/5/31 此处MLSQL对path有做TemplateMerge处理，还不清楚干嘛用
+
+        Dataset<Row> dataFrame = SourceRegister.fetch(param.format).load(reader, null, param.path, param.options);
+
+        // TODO streaming process
+        if (streamJob() || streamSource(param.format)) {
+            dataFrame = streamingProcess(dataFrame, param.options);
+        }
+
+        dataFrame.createOrReplaceTempView(param.tableName);
+    }
+
+    private boolean streamJob() {
+        return GlintExecutor.getContext().env().containsKey(DataSourceConstant.GLINT_STREAM_NAME);
+    }
+
+    private boolean streamSource(String name) {
+        return Arrays.asList(DataSourceConstant.DATA_SOURCE_ARRAY).contains(name);
+    }
+
+    private Dataset<Row> streamingProcess(Dataset<Row> dataFrame, Map<String, String> options) {
+        // handle watermark
+        if (options.containsKey(DataSourceConstant.STREAM_WATERMARK_EVENT_TIME_COLUMN)) {
+            dataFrame.withWatermark(options.get(DataSourceConstant.STREAM_WATERMARK_EVENT_TIME_COLUMN),
+                    options.get(DataSourceConstant.STREAM_WATERMARK_DELAY_THRESHOLD));
+        }
+
+        // handle kafka streaming
+
+
+        return dataFrame;
     }
 
     @Data
