@@ -2,7 +2,7 @@ package com.avizii.glint.explain;
 
 import cn.hutool.core.util.ReflectUtil;
 import com.avizii.glint.annotation.Syntax;
-import com.avizii.glint.common.AnnotationUtil;
+import com.avizii.glint.util.AnnotationUtil;
 import com.avizii.glint.core.Explain;
 import com.google.common.base.Preconditions;
 

@@ -18,6 +18,8 @@ public interface DataSourceConstant {
 
     String[] KAFKA_FIELDS = {"key", "partition", "offset", "timestamp", "timestampType", "topic"};
 
+    String KAFKA_VALUE_SCHEMA = "valueSchema";
+    String KAFKA_VALUE_FORMAT = "valueFormat";
 
 
 }

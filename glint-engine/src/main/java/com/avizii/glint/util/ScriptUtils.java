@@ -1,4 +1,4 @@
-package com.avizii.glint.common;
+package com.avizii.glint.util;
 
 import com.avizii.glint.parse.GlintParser;
 

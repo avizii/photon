@@ -1,4 +1,4 @@
-package com.avizii.glint.common;
+package com.avizii.glint.util;
 
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
