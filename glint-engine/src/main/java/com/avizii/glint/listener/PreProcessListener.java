@@ -12,7 +12,7 @@ public class PreProcessListener extends GlintBaseListener implements GlintHandle
 
     @Override
     public void handle() {
-        GlintContext context = GlintExecutor.getContext();
+//        GlintContext context = GlintExecutor.getContext();
     }
 
 }
