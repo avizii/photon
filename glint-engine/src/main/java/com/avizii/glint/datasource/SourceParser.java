@@ -6,7 +6,10 @@ import org.apache.spark.sql.catalyst.expressions.Expression;
 import java.io.Serializable;
 import java.util.Map;
 
-/** @Author : Avizii @Create : 2021.06.25 */
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 public abstract class SourceParser implements Serializable {
 
   public abstract Column parse(

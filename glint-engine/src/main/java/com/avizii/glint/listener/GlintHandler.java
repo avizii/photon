@@ -1,6 +1,9 @@
 package com.avizii.glint.listener;
 
-/** @Author : Avizii @Create : 2021.05.18 */
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 public interface GlintHandler {
 
   void handle();

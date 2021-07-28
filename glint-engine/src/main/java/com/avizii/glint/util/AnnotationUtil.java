@@ -14,7 +14,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/** @Author : Avizii @Create : 2021.05.25 */
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 public class AnnotationUtil {
 
   public static List<Class<?>> scan(String basePackage, Class annotation) {

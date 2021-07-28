@@ -10,7 +10,10 @@ import com.avizii.glint.parse.GlintParser;
 
 import java.util.Locale;
 
-/** @Author : Avizii @Create : 2021.05.17 */
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 public class ScriptProcessListener extends GlintBaseListener implements GlintHandler {
 
   @Override

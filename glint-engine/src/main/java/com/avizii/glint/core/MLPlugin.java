@@ -6,7 +6,10 @@ import org.apache.spark.sql.SparkSession;
 
 import java.util.Map;
 
-/** @Author : Avizii @Create : 2021.05.21 */
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 public interface MLPlugin extends Plugin {
 
   /** 机器学习训练 */

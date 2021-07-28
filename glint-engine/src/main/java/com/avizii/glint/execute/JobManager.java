@@ -10,7 +10,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Supplier;
 
-/** @Author : Avizii @Create : 2021.05.17 */
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 public class JobManager {
 
   private static final ExecutorService threadPool = Executors.newFixedThreadPool(50);

@@ -2,7 +2,10 @@ package com.avizii.glint.util;
 
 import org.apache.spark.sql.types.DataType;
 
-/** @Author : Avizii @Create : 2021.06.25 */
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 public class SparkSimpleSchemaParser {
 
   public static DataType parse(String str) {

@@ -6,7 +6,10 @@ import org.apache.spark.sql.Row;
 
 import java.util.Map;
 
-/** @Author : Avizii @Create : 2021.05.21 */
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 public interface Source extends DataSource {
 
   /** 数据加载 */

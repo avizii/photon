@@ -7,7 +7,12 @@ import org.apache.spark.sql.SparkSession;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/** @Author : Avizii @Create : 2021.05.14 @Description : Session管理器，用来处理多租户请求 */
+/**
+ * Session管理器，用来处理多租户请求
+ *
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 @Slf4j
 public class SessionManager {
 

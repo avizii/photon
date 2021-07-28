@@ -8,7 +8,10 @@ import org.apache.spark.sql.SparkSession;
 
 import java.util.Map;
 
-/** @Author : Avizii @Create : 2021.05.14 */
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 public class SparkRuntime extends GlintRuntime<SparkSession> {
 
   public static void create(Map<String, String> params) {

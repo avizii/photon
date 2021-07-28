@@ -6,7 +6,12 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-/** @Author : Avizii @Create : 2021.06.25 @Description : Glint命令语法糖 */
+/**
+ * Glint命令语法糖
+ *
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 public enum CommandSugarEnum {
   DESC("desc", "run command as ShowTableExt.`` where parameters='''{:all}'''"),
   KILL("kill", "run command as Kill.`{}`"),

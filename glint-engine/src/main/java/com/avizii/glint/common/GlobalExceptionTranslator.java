@@ -9,6 +9,10 @@ import com.github.structlog4j.SLoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 @RestControllerAdvice
 public class GlobalExceptionTranslator {
 

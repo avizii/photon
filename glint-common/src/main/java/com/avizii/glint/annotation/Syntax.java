@@ -2,7 +2,10 @@ package com.avizii.glint.annotation;
 
 import java.lang.annotation.*;
 
-/** @Author : Avizii @Create : 2021.05.25 */
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 @Documented
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

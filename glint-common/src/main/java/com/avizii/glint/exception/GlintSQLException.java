@@ -2,7 +2,10 @@ package com.avizii.glint.exception;
 
 import java.sql.SQLException;
 
-/** @Author : Avizii @Create : 2021.05.17 */
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 public class GlintSQLException extends SQLException {
 
   public GlintSQLException(String reason, String SQLState, int vendorCode) {

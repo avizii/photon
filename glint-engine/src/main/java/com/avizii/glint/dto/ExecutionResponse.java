@@ -3,7 +3,10 @@ package com.avizii.glint.dto;
 import com.avizii.glint.api.BaseResponse;
 import lombok.*;
 
-/** @Author : Avizii @Create : 2021.05.17 */
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 @Getter
 @Setter
 @NoArgsConstructor

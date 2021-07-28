@@ -2,7 +2,10 @@ package com.avizii.glint.runtime;
 
 import java.util.Map;
 
-/** @Author : Avizii @Create : 2021.05.14 */
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 public abstract class GlintRuntime<SESSION> {
 
   protected Map<String, String> params;

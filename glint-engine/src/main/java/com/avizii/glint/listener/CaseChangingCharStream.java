@@ -4,6 +4,10 @@ import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.misc.Interval;
 
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 public class CaseChangingCharStream implements CharStream {
 
   final CharStream stream;

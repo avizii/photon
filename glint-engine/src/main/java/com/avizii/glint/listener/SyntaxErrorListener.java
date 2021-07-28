@@ -4,7 +4,10 @@ import org.antlr.v4.runtime.BaseErrorListener;
 import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.Recognizer;
 
-/** @Author : Avizii @Create : 2021.05.14 */
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 public class SyntaxErrorListener extends BaseErrorListener {
 
   @Override

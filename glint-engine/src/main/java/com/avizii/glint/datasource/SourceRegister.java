@@ -9,7 +9,10 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-/** @Author : Avizii @Create : 2021.05.31 */
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 public class SourceRegister {
 
   private static final Map<String, Source> sourcePool = new ConcurrentHashMap<>();

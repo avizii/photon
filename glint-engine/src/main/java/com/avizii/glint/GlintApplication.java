@@ -3,7 +3,10 @@ package com.avizii.glint;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/** @Author : Avizii @Create : 2021.05.14 */
+/**
+ * @author : Avizii
+ * @create : 2021.05.20
+ */
 @SpringBootApplication
 public class GlintApplication {
 

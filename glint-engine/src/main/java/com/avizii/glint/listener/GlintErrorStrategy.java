@@ -4,7 +4,10 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.atn.ATNState;
 import org.antlr.v4.runtime.misc.IntervalSet;
 
-/** @Author : Avizii @Create : 2021.05.14 */
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 public class GlintErrorStrategy extends DefaultErrorStrategy {
 
   @Override

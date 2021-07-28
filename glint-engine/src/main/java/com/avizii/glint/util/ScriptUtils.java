@@ -2,7 +2,10 @@ package com.avizii.glint.util;
 
 import com.avizii.glint.parse.GlintParser;
 
-/** @Author : Avizii @Create : 2021.05.25 */
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 public class ScriptUtils {
 
   public static String cleanStr(String str) {

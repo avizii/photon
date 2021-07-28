@@ -2,7 +2,10 @@ package com.avizii.glint.core;
 
 import com.avizii.glint.parse.GlintParser.SqlContext;
 
-/** @Author : Avizii @Create : 2021.05.25 */
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 public interface Explain {
 
   void explain(SqlContext ctx);

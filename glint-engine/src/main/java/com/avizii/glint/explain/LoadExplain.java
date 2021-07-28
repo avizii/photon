@@ -20,7 +20,10 @@ import org.apache.spark.sql.SparkSession;
 import java.util.HashMap;
 import java.util.Map;
 
-/** @Author : Avizii @Create : 2021.05.25 */
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 @Syntax(name = "load")
 public class LoadExplain implements Explain {
 

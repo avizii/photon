@@ -4,7 +4,10 @@ import org.apache.spark.sql.Column;
 
 import java.util.Map;
 
-/** @Author : Avizii @Create : 2021.06.25 */
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 public class CsvSourceParser extends SourceParser {
 
   @Override

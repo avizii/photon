@@ -3,7 +3,10 @@ package com.avizii.glint.api;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-/** @Author : Avizii @Create : 2021.05.17 */
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 @Getter
 @AllArgsConstructor
 public enum ResultCode {

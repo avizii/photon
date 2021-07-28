@@ -9,7 +9,10 @@ import com.avizii.glint.parse.GlintParser;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
-/** @Author : Avizii @Create : 2021.05.14 */
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 public class GlintExecutor {
 
   private static final ThreadLocal<GlintContext> glintContext = new ThreadLocal<>();

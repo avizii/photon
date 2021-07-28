@@ -1,6 +1,9 @@
 package com.avizii.glint.common;
 
-/** @Author : Avizii @Create : 2021.06.11 */
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 public interface DataSourceConstant {
 
   String GLINT_STREAM_NAME = "streamName";

@@ -3,7 +3,12 @@ package com.avizii.glint.listener;
 import java.util.LinkedList;
 import java.util.List;
 
-/** @Author : Avizii @Create : 2021.05.18 @Description : 责任链模式处理Antlr Listener */
+/**
+ * 责任链模式处理Antlr Listener
+ *
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 public class ListenerChain {
 
   private final List<GlintHandler> handlerList = new LinkedList<>();

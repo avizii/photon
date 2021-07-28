@@ -1,6 +1,9 @@
 package com.avizii.glint.common;
 
-/** @Author : Avizii @Create : 2021.05.14 */
+/**
+ * @author : Avizii
+ * @create : 2021.05.21
+ */
 public class GlintConstant {
 
   public static final String GLINT_RUNTIME_PLATFORM = "glint.runtime.platform";
