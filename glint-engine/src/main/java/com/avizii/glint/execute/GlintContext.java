@@ -11,52 +11,42 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Author : Avizii
- * @Create : 2021.05.17
- */
+/** @Author : Avizii @Create : 2021.05.17 */
 @AllArgsConstructor
 @Getter
 public class GlintContext {
 
-    @Setter
-    private RunScriptRequest param;
+  @Setter private RunScriptRequest param;
 
-    private final SparkSession session;
+  private final SparkSession session;
 
-    private final JobInfo jobInfo;
+  private final JobInfo jobInfo;
 
-    /**
-     * last spark sql tempView name in a job
-     */
-    private String lastSelectTable = null;
+  /** last spark sql tempView name in a job */
+  private String lastSelectTable = null;
 
-    /**
-     * all Spark SQL tempView name in a job
-     */
-    private final List<String> declaredTables = new ArrayList<>(3);
+  /** all Spark SQL tempView name in a job */
+  private final List<String> declaredTables = new ArrayList<>(3);
 
-    /**
-     * environment params
-     */
-    private final Map<String, String> envMap = new HashMap<>();
+  /** environment params */
+  private final Map<String, String> envMap = new HashMap<>();
 
-    public GlintContext(SparkSession session, RunScriptRequest param, JobInfo jobInfo) {
-        this.session = session;
-        this.param = param;
-        this.jobInfo = jobInfo;
-    }
+  public GlintContext(SparkSession session, RunScriptRequest param, JobInfo jobInfo) {
+    this.session = session;
+    this.param = param;
+    this.jobInfo = jobInfo;
+  }
 
-    public void setLastSelectTable(String table) {
-        declaredTables.add(table);
-        this.lastSelectTable = table;
-    }
+  public void setLastSelectTable(String table) {
+    declaredTables.add(table);
+    this.lastSelectTable = table;
+  }
 
-    public Map<String, String> env() {
-        return envMap;
-    }
+  public Map<String, String> env() {
+    return envMap;
+  }
 
-    public void addEnv(String key, String value) {
-        envMap.put(key, value);
-    }
+  public void addEnv(String key, String value) {
+    envMap.put(key, value);
+  }
 }

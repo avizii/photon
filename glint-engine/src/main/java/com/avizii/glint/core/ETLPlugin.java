@@ -5,15 +5,9 @@ import org.apache.spark.sql.Row;
 
 import java.util.Map;
 
-/**
- * @Author : Avizii
- * @Create : 2021.05.21
- */
+/** @Author : Avizii @Create : 2021.05.21 */
 public interface ETLPlugin extends Plugin {
 
-    /**
-     * DataFrame转换操作
-     */
-    Dataset<Row> transform(Dataset<Row> dataframe, String path, Map<String, String> params);
-
+  /** DataFrame转换操作 */
+  Dataset<Row> transform(Dataset<Row> dataframe, String path, Map<String, String> params);
 }

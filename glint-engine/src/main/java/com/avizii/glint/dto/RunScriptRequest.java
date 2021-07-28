@@ -7,55 +7,50 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 
-/**
- * @Author : Avizii
- * @Create : 2021.05.17
- */
+/** @Author : Avizii @Create : 2021.05.17 */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class RunScriptRequest {
 
-    @NotEmpty
-    private String sql;
+  @NotEmpty private String sql;
 
-    private String token;
+  private String token;
 
-    private String jobType;   // script/stream/sql
+  private String jobType; // script/stream/sql
 
-    private String executeMode;  // query/analyze
+  private String executeMode; // query/analyze
 
-    private String jobName;
+  private String jobName;
 
-    private String jobId;  // job identify - uuid
+  private String jobId; // job identify - uuid
 
-    private Long timeout;
+  private Long timeout;
 
-    private Boolean silence; // last sql in script return nothing
+  private Boolean silence; // last sql in script return nothing
 
-    private String sessionType; // global/per_user/per_request
+  private String sessionType; // global/per_user/per_request
 
-    private Boolean async;
+  private Boolean async;
 
-    private String callbackUrl;
+  private String callbackUrl;
 
-    private Boolean skipInclude;
+  private Boolean skipInclude;
 
-    private Boolean skipAuth;
+  private Boolean skipAuth;
 
-    private Boolean skipGrammarValidate;
+  private Boolean skipGrammarValidate;
 
-    private Boolean skipPhysical;
+  private Boolean skipPhysical;
 
-    private Boolean includeSchema; // return schema info
+  private Boolean includeSchema; // return schema info
 
-    private Boolean onlySchema;
+  private Boolean onlySchema;
 
-    private String fetchType; // take/collect
+  private String fetchType; // take/collect
 
-    private Integer fetchSize; // take size data
+  private Integer fetchSize; // take size data
 
-    private Boolean enableQueryWithIndexer; // query with indexer to speed up
-
+  private Boolean enableQueryWithIndexer; // query with indexer to speed up
 }

@@ -3,40 +3,37 @@ package com.avizii.glint.api;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-/**
- * @Author : Avizii
- * @Create : 2021.05.17
- */
+/** @Author : Avizii @Create : 2021.05.17 */
 @Getter
 @AllArgsConstructor
 public enum ResultCode {
-    SUCCESS(200, "Operation is Successful"),
+  SUCCESS(200, "Operation is Successful"),
 
-    FAILURE(400, "Biz Exception"),
+  FAILURE(400, "Biz Exception"),
 
-    UN_AUTHORIZED(401, "Request Unauthorized"),
+  UN_AUTHORIZED(401, "Request Unauthorized"),
 
-    NOT_FOUND(404, "404 Not Found"),
+  NOT_FOUND(404, "404 Not Found"),
 
-    MSG_NOT_READABLE(400, "Message Can't be Read"),
+  MSG_NOT_READABLE(400, "Message Can't be Read"),
 
-    METHOD_NOT_SUPPORTED(405, "Method Not Supported"),
+  METHOD_NOT_SUPPORTED(405, "Method Not Supported"),
 
-    MEDIA_TYPE_NOT_SUPPORTED(415, "Media Type Not Supported"),
+  MEDIA_TYPE_NOT_SUPPORTED(415, "Media Type Not Supported"),
 
-    REQ_REJECT(403, "Request Rejected"),
+  REQ_REJECT(403, "Request Rejected"),
 
-    INTERNAL_SERVER_ERROR(500, "Internal Server Error"),
+  INTERNAL_SERVER_ERROR(500, "Internal Server Error"),
 
-    PARAM_MISS(400, "Missing Required Parameter"),
+  PARAM_MISS(400, "Missing Required Parameter"),
 
-    PARAM_TYPE_ERROR(400, "Parameter Type Mismatch"),
+  PARAM_TYPE_ERROR(400, "Parameter Type Mismatch"),
 
-    PARAM_BIND_ERROR(400, "Parameter Binding Error"),
+  PARAM_BIND_ERROR(400, "Parameter Binding Error"),
 
-    PARAM_VALID_ERROR(400, "Parameter Validation Error");
+  PARAM_VALID_ERROR(400, "Parameter Validation Error");
 
-    final int code;
+  final int code;
 
-    final String msg;
+  final String msg;
 }

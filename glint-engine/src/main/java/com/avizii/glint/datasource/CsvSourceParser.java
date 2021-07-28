@@ -4,14 +4,11 @@ import org.apache.spark.sql.Column;
 
 import java.util.Map;
 
-/**
- * @Author : Avizii
- * @Create : 2021.06.25
- */
+/** @Author : Avizii @Create : 2021.06.25 */
 public class CsvSourceParser extends SourceParser {
 
-    @Override
-    public Column parse(Column column, SourceSchema sourceSchema, Map<String, String> options) {
-        return null;
-    }
+  @Override
+  public Column parse(Column column, SourceSchema sourceSchema, Map<String, String> options) {
+    return null;
+  }
 }

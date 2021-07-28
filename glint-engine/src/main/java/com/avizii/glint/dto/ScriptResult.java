@@ -5,23 +5,20 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * @Author : Avizii
- * @Create : 2021.05.17
- */
+/** @Author : Avizii @Create : 2021.05.17 */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class ScriptResult {
 
-    private String fetchType;
+  private String fetchType;
 
-    private Long fetchSize;
+  private Long fetchSize;
 
-    private Boolean includeSchema;
+  private Boolean includeSchema;
 
-    private String dataJson;
+  private String dataJson;
 
-    private String schemaJson;
+  private String schemaJson;
 }
