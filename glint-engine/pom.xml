@@ -48,6 +48,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>janino</artifactId>
+            <version>3.0.8</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-mllib_2.12</artifactId>
             <version>3.1.1</version>
@@ -84,6 +90,11 @@
             <version>1.7</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.houbb</groupId>
+            <artifactId>word-checker</artifactId>
+            <version>0.1.0</version>
+        </dependency>
 
     </dependencies>
 
