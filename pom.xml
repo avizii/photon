@@ -13,6 +13,10 @@
         <module>photon-engine</module>
         <module>photon-common</module>
         <module>photon-all</module>
+        <module>photon-spark</module>
+        <module>photon-core</module>
+        <module>photon-plugin</module>
+        <module>photon-function</module>
     </modules>
 
     <properties>
