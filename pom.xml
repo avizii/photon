@@ -4,13 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.avizii.glint</groupId>
-    <artifactId>glint-parent</artifactId>
+    <groupId>com.avizii.photon</groupId>
+    <artifactId>photon-parent</artifactId>
     <packaging>pom</packaging>
     <version>0.0.1</version>
+
     <modules>
-        <module>glint-engine</module>
-        <module>glint-common</module>
+        <module>photon-engine</module>
+        <module>photon-common</module>
+        <module>photon-all</module>
     </modules>
 
     <properties>
